@@ -1,0 +1,191 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<h1>HELLO</h1>
+<style>
+
+	body{
+		background-color: #F0FFFF;
+		margin: 20px
+	}
+
+	input{
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+	}
+
+	input::placeholder {
+	  color: #d3d3d3;
+	}
+
+	.submit{
+		background-color: #6BA3E8;
+	}
+
+	.center-column{
+		width:600px;
+		margin: 20px auto;
+		padding:20px;
+		background-color: #fff;
+		border-radius: 3px;
+		box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+	}
+
+	.item-row{
+		background-color: #906abd;
+		margin: 10px;
+		padding: 20px;
+		grid-row-gap: 200px;
+		border-radius: 3px;
+		color: #fff;
+		font-size: 16px;
+		box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
+	}
+
+	.btn-danger{
+		background-color: #ffae19;
+		border-color: #e59400;
+	}
+
+	.post-wrapper{
+		display: flex;
+		grid-template-columns: repeat(auto-fit, 320px);
+		gap: 20px;
+		justify-content: center;
+		padding-bottom: 50px;
+	}
+
+	.post{
+		border: 1px solid var(--borderColor);
+		-webkit-box-shadow: -2px 7px 21px 9px rgba(0,0,0,0,75);
+		-moz-box-shadow: -2px 7px 21px -9px rgba(0,0,0,0,75);
+		box-shadow: -2px 7px 21px -9px rgba(0,0,0,0,75);
+	}
+
+	h1 { font-size: 56px; }
+	h2 { font-size: 36px; }
+	h3 { font-size: 28px; }
+	h4 { font-size: 24px; }
+	h5 { font-size: 20px; }
+	h6 { font-size: 16px; }
+
+	.s1{
+		background-color: var(--mainColor);
+		border-bottom:1px solid var(--borderColor);
+		overflow:auto;
+	}
+
+	.main-container{
+	width: 1200px;
+	margin: 0 auto;
+	}
+
+	.post-preview{
+	background-color: #fff;
+	padding:15px;
+	}
+
+	.post-title{
+	color: black;
+	margin: 0;
+	}
+
+	.post-intro{
+	color: #4b5156;
+	font-size: 14px;
+
+	}
+
+</style>
+
+<div class="left-column">
+
+
+<!-- add form here, form is the see Models.py, Title, complete, submit fields -->
+<form method="POST" action="">
+	{% csrf_token %}
+	{{form.as_p}}
+	<input class="btn btn-info" type="submit" name="Create StickBombs">
+</form>
+
+{% for sticky in stickys %}
+
+	<div class="item-row">	
+		<!-- the href is like hyperlink, to url, this sticky.id link -->
+		<a href="{% url 'update_sticky' sticky.id %}">Update</a>
+		<a href="{% url 'delete' sticky.id %}">Delete</a>
+
+
+	
+	<div class="main-container">
+		{% if sticky.complete == True %}       
+		<strike>{{sticky}}</strike>
+		{% else %}
+		<span>{{sticky}}</span>
+		{% endif %}
+	</div>
+
+{% endfor %}
+
+
+<section class="s1">
+		<div class="main-container">
+			<h3 style="text-align: center;">Add Anywhere, Anytime, and see unique self</h3>
+
+			<div class="post-wrapper">
+
+				<div class="post">
+					<img class="">
+					<div class="post-preview">
+						<h6 class="post-title">Glance through</h6>
+						<p class="post-intro">Write anywhere!</p>
+					</div>
+				</div>
+
+				<div class="post">
+					<img class="">
+					<div class="post-preview">
+						<h6 class="post-title">Grow</h6>
+						<p class="post-intro">Your favourites</p>
+					</div>
+				</div>
+
+				<div class="post">
+					<img class="">
+					<div class="post-preview">
+						<h6 class="post-title">Reminders in one glance</h6>
+						<p class="post-intro">Easy to navigate!</p>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+
+<div class="center-column">
+
+
+<h1>SECOND FORM</h1>
+<form method="POST" action="">
+	{% csrf_token %}
+	{{form.as_p}}
+	<input class="btn btn-info" type="submit" name="Create StickBombs2">
+</form>
+
+{% for sticky2 in sticky2s %}
+
+	<div class="item-row">	
+		<!-- the href is like hyperlink, to url, this sticky.id link -->
+		<a class="btn btn-sm btn-info" href="{% url 'update_sticky2' sticky2.id %}">Update</a>
+		<a class ="btn btn-danger" href="{% url 'delete2' sticky2.id %}">Delete</a> 
+	
+	
+		{% if sticky2.complete == True %}       
+		<strike>{{sticky2}}</strike>
+		{% else %}
+		<span>{{sticky2}}</span>
+		{% endif %}
+	</div>
+{% endfor %}
